@@ -13,8 +13,12 @@ class AppDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           DrawerHeader(
-            decoration: BoxDecoration(
-              color: theme.colorScheme.primary,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: AppConstants.forestGradient,
+              ),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -22,11 +26,11 @@ class AppDrawer extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 30,
-                  backgroundColor: theme.colorScheme.onPrimary,
+                  backgroundColor: Colors.white,
                   child: Icon(
-                    Icons.person,
+                    Icons.nature_people,
                     size: 30,
-                    color: theme.colorScheme.primary,
+                    color: AppConstants.primaryColor,
                   ),
                 ),
                 const SizedBox(height: AppConstants.paddingSmall),
@@ -47,23 +51,23 @@ class AppDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: const Icon(Icons.home),
-            title: const Text('Home'),
+            leading: Icon(Icons.forest, color: AppConstants.primaryColor),
+            title: const Text('Forest Home'),
             onTap: () {
               Navigator.pop(context);
             },
           ),
           ListTile(
-            leading: const Icon(Icons.person),
-            title: const Text('Profile'),
+            leading: Icon(Icons.nature_people, color: AppConstants.leafGreen),
+            title: const Text('Explorer Profile'),
             onTap: () {
               Navigator.pop(context);
               // TODO: Navigate to profile screen
             },
           ),
           ListTile(
-            leading: const Icon(Icons.settings),
-            title: const Text('Settings'),
+            leading: Icon(Icons.eco, color: AppConstants.mossGreen),
+            title: const Text('Nature Settings'),
             onTap: () {
               Navigator.pop(context);
               // TODO: Navigate to settings screen
@@ -71,16 +75,16 @@ class AppDrawer extends StatelessWidget {
           ),
           const Divider(),
           ListTile(
-            leading: const Icon(Icons.help),
-            title: const Text('Help & Support'),
+            leading: Icon(Icons.help_outline, color: AppConstants.earthBrown),
+            title: const Text('Forest Guide'),
             onTap: () {
               Navigator.pop(context);
               // TODO: Navigate to help screen
             },
           ),
           ListTile(
-            leading: const Icon(Icons.info),
-            title: const Text('About'),
+            leading: Icon(Icons.info_outline, color: AppConstants.accentColor),
+            title: const Text('About Forest VAN'),
             onTap: () {
               Navigator.pop(context);
               _showAboutDialog(context);

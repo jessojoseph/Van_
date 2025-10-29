@@ -15,8 +15,28 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final List<Widget> _pages = [
     const CounterWidget(),
-    const Center(child: Text('Profile Page')),
-    const Center(child: Text('Settings Page')),
+    const Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.person, size: 80, color: AppConstants.primaryColor),
+          SizedBox(height: 16),
+          Text('Forest Explorer Profile', 
+               style: TextStyle(fontSize: 24, color: AppConstants.earthBrown)),
+        ],
+      ),
+    ),
+    const Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.settings, size: 80, color: AppConstants.mossGreen),
+          SizedBox(height: 16),
+          Text('Nature Settings', 
+               style: TextStyle(fontSize: 24, color: AppConstants.earthBrown)),
+        ],
+      ),
+    ),
   ];
 
   void _onItemTapped(int index) {
@@ -54,19 +74,22 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+            icon: Icon(Icons.forest),
+            label: 'Forest',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
+            icon: Icon(Icons.nature_people),
+            label: 'Explorer',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
+            icon: Icon(Icons.eco),
+            label: 'Nature',
           ),
         ],
         currentIndex: _selectedIndex,
+        selectedItemColor: AppConstants.primaryColor,
+        unselectedItemColor: AppConstants.earthBrown,
+        backgroundColor: const Color(0xFFF1F8E9),
         onTap: _onItemTapped,
       ),
     );

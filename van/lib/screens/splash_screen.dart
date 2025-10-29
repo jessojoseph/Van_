@@ -79,18 +79,15 @@ class _SplashScreenState extends State<SplashScreen>
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: theme.colorScheme.primary,
+      backgroundColor: AppConstants.primaryColor,
       body: Container(
         width: size.width,
         height: size.height,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              theme.colorScheme.primary,
-              theme.colorScheme.primaryContainer,
-            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: AppConstants.forestGradient,
           ),
         ),
         child: SafeArea(
@@ -109,25 +106,62 @@ class _SplashScreenState extends State<SplashScreen>
                       scale: _scaleAnimation,
                       child: Column(
                         children: [
-                          // App Icon
+                          // Forest Icon with Nature Elements
                           Container(
-                            width: 120,
-                            height: 120,
+                            width: 140,
+                            height: 140,
                             decoration: BoxDecoration(
-                              color: theme.colorScheme.onPrimary,
-                              borderRadius: BorderRadius.circular(AppConstants.borderRadiusLarge),
+                              gradient: const LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [
+                                  Colors.white,
+                                  Color(0xFFF1F8E9),
+                                ],
+                              ),
+                              borderRadius: BorderRadius.circular(70),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black.withAlpha(51),
-                                  blurRadius: 20,
-                                  offset: const Offset(0, 10),
+                                  color: Colors.black.withAlpha(76),
+                                  blurRadius: 25,
+                                  offset: const Offset(0, 12),
+                                ),
+                                BoxShadow(
+                                  color: AppConstants.primaryColor.withAlpha(51),
+                                  blurRadius: 40,
+                                  offset: const Offset(0, 8),
                                 ),
                               ],
                             ),
-                            child: Icon(
-                              Icons.directions_car,
-                              size: 60,
-                              color: theme.colorScheme.primary,
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                // Background trees
+                                Positioned(
+                                  top: 25,
+                                  left: 20,
+                                  child: Icon(
+                                    Icons.park,
+                                    size: 35,
+                                    color: AppConstants.mossGreen.withAlpha(128),
+                                  ),
+                                ),
+                                Positioned(
+                                  top: 25,
+                                  right: 20,
+                                  child: Icon(
+                                    Icons.forest,
+                                    size: 30,
+                                    color: AppConstants.leafGreen.withAlpha(128),
+                                  ),
+                                ),
+                                // Main forest icon
+                                Icon(
+                                  Icons.nature_people,
+                                  size: 70,
+                                  color: AppConstants.primaryColor,
+                                ),
+                              ],
                             ),
                           ),
                           
@@ -147,10 +181,11 @@ class _SplashScreenState extends State<SplashScreen>
                           
                           // App Tagline
                           Text(
-                            'Your Journey Starts Here',
+                            AppConstants.appTagline,
                             style: theme.textTheme.titleMedium?.copyWith(
-                              color: theme.colorScheme.onPrimary.withAlpha(204),
-                              letterSpacing: 0.5,
+                              color: Colors.white.withAlpha(230),
+                              letterSpacing: 0.8,
+                              fontStyle: FontStyle.italic,
                             ),
                           ),
                         ],

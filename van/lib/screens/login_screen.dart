@@ -134,9 +134,20 @@ class _LoginScreenState extends State<LoginScreen>
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: theme.colorScheme.surface,
-      body: SafeArea(
-        child: SingleChildScrollView(
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color(0xFFF1F8E9), // Light Green Background
+              Color(0xFFE8F5E8), // Very Light Green
+              Color(0xFFC8E6C9), // Soft Green
+            ],
+          ),
+        ),
+        child: SafeArea(
+          child: SingleChildScrollView(
           padding: const EdgeInsets.all(AppConstants.paddingLarge),
           child: SizedBox(
             height: size.height - MediaQuery.of(context).padding.top - AppConstants.paddingLarge * 2,
@@ -156,42 +167,77 @@ class _LoginScreenState extends State<LoginScreen>
                         Column(
                           children: [
                             Container(
-                              width: 80,
-                              height: 80,
+                              width: 100,
+                              height: 100,
                               decoration: BoxDecoration(
-                                color: theme.colorScheme.primary,
-                                borderRadius: BorderRadius.circular(AppConstants.borderRadiusLarge),
+                                gradient: const LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: AppConstants.forestGradient,
+                                ),
+                                borderRadius: BorderRadius.circular(50),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: theme.colorScheme.primary.withAlpha(76),
-                                    blurRadius: 20,
-                                    offset: const Offset(0, 8),
+                                    color: AppConstants.primaryColor.withAlpha(102),
+                                    blurRadius: 25,
+                                    offset: const Offset(0, 10),
+                                  ),
+                                  BoxShadow(
+                                    color: Colors.black.withAlpha(25),
+                                    blurRadius: 15,
+                                    offset: const Offset(0, 5),
                                   ),
                                 ],
                               ),
-                              child: Icon(
-                                Icons.directions_car,
-                                size: 40,
-                                color: theme.colorScheme.onPrimary,
+                              child: Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  // Background nature elements
+                                  Positioned(
+                                    top: 15,
+                                    left: 15,
+                                    child: Icon(
+                                      Icons.eco,
+                                      size: 20,
+                                      color: Colors.white.withAlpha(128),
+                                    ),
+                                  ),
+                                  Positioned(
+                                    bottom: 15,
+                                    right: 15,
+                                    child: Icon(
+                                      Icons.local_florist,
+                                      size: 18,
+                                      color: Colors.white.withAlpha(128),
+                                    ),
+                                  ),
+                                  // Main forest icon
+                                  const Icon(
+                                    Icons.forest,
+                                    size: 50,
+                                    color: Colors.white,
+                                  ),
+                                ],
                               ),
                             ),
                             
                             const SizedBox(height: AppConstants.paddingLarge),
                             
                             Text(
-                              'Welcome Back!',
+                              'Welcome to the Forest!',
                               style: theme.textTheme.headlineMedium?.copyWith(
                                 fontWeight: FontWeight.bold,
-                                color: theme.colorScheme.onSurface,
+                                color: AppConstants.primaryColor,
                               ),
                             ),
                             
                             const SizedBox(height: AppConstants.paddingSmall),
                             
                             Text(
-                              'Sign in to continue your journey',
+                              'Sign in to explore nature\'s wonders',
                               style: theme.textTheme.bodyLarge?.copyWith(
-                                color: theme.colorScheme.onSurface.withAlpha(178),
+                                color: AppConstants.earthBrown,
+                                fontStyle: FontStyle.italic,
                               ),
                             ),
                           ],
@@ -325,6 +371,7 @@ class _LoginScreenState extends State<LoginScreen>
               },
             ),
           ),
+        ),
         ),
       ),
     );

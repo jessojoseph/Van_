@@ -77,9 +77,29 @@ class _CounterWidgetState extends State<CounterWidget>
               padding: const EdgeInsets.all(AppConstants.paddingLarge),
               child: Column(
                 children: [
-                  Text(
-                    'Counter Value',
-                    style: theme.textTheme.headlineSmall,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.eco,
+                        color: AppConstants.primaryColor,
+                        size: 28,
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        'Forest Seeds Planted',
+                        style: theme.textTheme.headlineSmall?.copyWith(
+                          color: AppConstants.primaryColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Icon(
+                        Icons.local_florist,
+                        color: AppConstants.accentColor,
+                        size: 24,
+                      ),
+                    ],
                   ),
                   const SizedBox(height: AppConstants.paddingMedium),
                   AnimatedBuilder(
@@ -108,21 +128,24 @@ class _CounterWidgetState extends State<CounterWidget>
               FloatingActionButton(
                 onPressed: _decrementCounter,
                 heroTag: 'decrement',
-                tooltip: 'Decrement',
-                child: const Icon(Icons.remove),
+                tooltip: 'Remove Tree',
+                backgroundColor: AppConstants.earthBrown,
+                child: const Icon(Icons.remove, color: Colors.white),
               ),
               FloatingActionButton.extended(
                 onPressed: _resetCounter,
                 heroTag: 'reset',
-                tooltip: 'Reset',
-                label: const Text('Reset'),
-                icon: const Icon(Icons.refresh),
+                tooltip: 'Clear Forest',
+                backgroundColor: AppConstants.mossGreen,
+                label: const Text('Clear Forest', style: TextStyle(color: Colors.white)),
+                icon: const Icon(Icons.refresh, color: Colors.white),
               ),
               FloatingActionButton(
                 onPressed: _incrementCounter,
                 heroTag: 'increment',
-                tooltip: 'Increment',
-                child: const Icon(Icons.add),
+                tooltip: 'Plant Tree',
+                backgroundColor: AppConstants.primaryColor,
+                child: const Icon(Icons.add, color: Colors.white),
               ),
             ],
           ),
