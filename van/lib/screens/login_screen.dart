@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../constants/app_constants.dart';
 import '../utils/app_utils.dart';
 import '../widgets/custom_buttons.dart';
+import '../widgets/custom_text_field.dart';
 import 'home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -143,20 +144,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Username Label
-                      Text(
-                        'Username',
-                        style: theme.textTheme.bodyMedium?.copyWith(
-                          color: Colors.black87,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      
-                      const SizedBox(height: 8),
-                      
                       // Username Field
-                      TextFormField(
+                      CustomTextField(
                         controller: _emailController,
+                        labelText: 'Username',
+                        hintText: 'Your username',
                         keyboardType: TextInputType.text,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -164,58 +156,29 @@ class _LoginScreenState extends State<LoginScreen> {
                           }
                           return null;
                         },
-                        decoration: InputDecoration(
-                          hintText: 'Your username',
-                          hintStyle: TextStyle(
-                            color: Colors.black38,
-                            fontSize: 16,
-                          ),
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                            borderSide: BorderSide.none,
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                            borderSide: BorderSide.none,
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                            borderSide: BorderSide.none,
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                            borderSide: BorderSide(color: Colors.red.shade300),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                            borderSide: BorderSide(color: Colors.red.shade300, width: 2),
-                          ),
-                          contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 24,
-                            vertical: 18,
-                          ),
-                        ),
                       ),
                       
                       const SizedBox(height: 24),
                       
-                      // Password Label
-                      Text(
-                        'Password',
-                        style: theme.textTheme.bodyMedium?.copyWith(
-                          color: Colors.black87,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      
-                      const SizedBox(height: 8),
-                      
                       // Password Field
-                      TextFormField(
+                      CustomTextField(
                         controller: _passwordController,
+                        labelText: 'Password',
+                        hintText: 'Your password',
                         obscureText: !_isPasswordVisible,
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _isPasswordVisible
+                                ? Icons.visibility_off_outlined
+                                : Icons.visibility_outlined,
+                            color: Colors.black54,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _isPasswordVisible = !_isPasswordVisible;
+                            });
+                          },
+                        ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter your password';
@@ -225,59 +188,13 @@ class _LoginScreenState extends State<LoginScreen> {
                           }
                           return null;
                         },
-                        decoration: InputDecoration(
-                          hintText: 'Your password',
-                          hintStyle: TextStyle(
-                            color: Colors.black38,
-                            fontSize: 16,
-                          ),
-                          filled: true,
-                          fillColor: Colors.white,
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              _isPasswordVisible
-                                  ? Icons.visibility_off_outlined
-                                  : Icons.visibility_outlined,
-                              color: Colors.black54,
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                _isPasswordVisible = !_isPasswordVisible;
-                              });
-                            },
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                            borderSide: BorderSide.none,
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                            borderSide: BorderSide.none,
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                            borderSide: BorderSide.none,
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                            borderSide: BorderSide(color: Colors.red.shade300),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                            borderSide: BorderSide(color: Colors.red.shade300, width: 2),
-                          ),
-                          contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 24,
-                            vertical: 18,
-                          ),
-                        ),
                       ),
                       
                       const SizedBox(height: 32),
                       
                       // Connect Button
                       PrimaryButton(
-                        text: 'Connect',
+                        text: 'Log in',
                         isLoading: _isLoading,
                         onPressed: _handleLogin,
                       ),

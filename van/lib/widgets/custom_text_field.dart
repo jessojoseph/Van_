@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../constants/app_constants.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
@@ -44,10 +43,10 @@ class CustomTextField extends StatelessWidget {
           labelText,
           style: theme.textTheme.bodyMedium?.copyWith(
             fontWeight: FontWeight.w500,
-            color: theme.colorScheme.onSurface,
+            color: Colors.black87,
           ),
         ),
-        const SizedBox(height: AppConstants.paddingSmall),
+        const SizedBox(height: 8),
         TextFormField(
           controller: controller,
           obscureText: obscureText,
@@ -61,59 +60,45 @@ class CustomTextField extends StatelessWidget {
           style: theme.textTheme.bodyLarge,
           decoration: InputDecoration(
             hintText: hintText,
-            hintStyle: theme.textTheme.bodyLarge?.copyWith(
-              color: theme.colorScheme.onSurface.withAlpha(128),
+            hintStyle: const TextStyle(
+              color: Colors.black38,
+              fontSize: 16,
             ),
             prefixIcon: prefixIcon != null
                 ? Icon(
                     prefixIcon,
-                    color: theme.colorScheme.onSurface.withAlpha(153),
+                    color: Colors.black54,
                   )
                 : null,
             suffixIcon: suffixIcon,
             filled: true,
-            fillColor: theme.colorScheme.surfaceContainerHighest.withAlpha(128),
+            fillColor: Colors.white,
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(AppConstants.borderRadiusMedium),
-              borderSide: BorderSide(
-                color: theme.colorScheme.outline.withAlpha(128),
-                width: 1,
-              ),
+              borderRadius: BorderRadius.circular(20),
+              borderSide: BorderSide.none,
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(AppConstants.borderRadiusMedium),
-              borderSide: BorderSide(
-                color: theme.colorScheme.outline.withAlpha(128),
-                width: 1,
-              ),
+              borderRadius: BorderRadius.circular(20),
+              borderSide: BorderSide.none,
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(AppConstants.borderRadiusMedium),
-              borderSide: BorderSide(
-                color: theme.colorScheme.primary,
-                width: 2,
-              ),
+              borderRadius: BorderRadius.circular(20),
+              borderSide: BorderSide.none,
             ),
             errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(AppConstants.borderRadiusMedium),
-              borderSide: BorderSide(
-                color: theme.colorScheme.error,
-                width: 1,
-              ),
+              borderRadius: BorderRadius.circular(20),
+              borderSide: BorderSide(color: Colors.red.shade300),
             ),
             focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(AppConstants.borderRadiusMedium),
-              borderSide: BorderSide(
-                color: theme.colorScheme.error,
-                width: 2,
-              ),
+              borderRadius: BorderRadius.circular(20),
+              borderSide: BorderSide(color: Colors.red.shade300, width: 2),
             ),
             contentPadding: const EdgeInsets.symmetric(
-              horizontal: AppConstants.paddingMedium,
-              vertical: AppConstants.paddingMedium,
+              horizontal: 24,
+              vertical: 18,
             ),
             errorStyle: theme.textTheme.bodySmall?.copyWith(
-              color: theme.colorScheme.error,
+              color: Colors.red.shade700,
             ),
           ),
         ),
