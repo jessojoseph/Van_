@@ -76,178 +76,122 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: AppConstants.primaryColor,
-      body: Container(
-        width: size.width,
-        height: size.height,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: AppConstants.forestGradient,
+      backgroundColor: const Color.fromARGB(255, 87, 172, 87),
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          // Background Image
+          Image.asset(
+            'assets/welcome_screen.jpg',
+            fit: BoxFit.cover,
+            frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+              if (wasSynchronouslyLoaded) {
+                return child;
+              }
+              return AnimatedOpacity(
+                opacity: frame == null ? 0 : 1,
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeOut,
+                child: child,
+              );
+            },
           ),
-        ),
-        child: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Spacer(flex: 2),
-              
-              // App Logo and Name
-              AnimatedBuilder(
-                animation: _animationController,
-                builder: (context, child) {
-                  return FadeTransition(
-                    opacity: _fadeAnimation,
-                    child: ScaleTransition(
-                      scale: _scaleAnimation,
-                      child: Column(
-                        children: [
-                          // Forest Icon with Nature Elements
-                          Container(
-                            width: 140,
-                            height: 140,
-                            decoration: BoxDecoration(
-                              gradient: const LinearGradient(
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                                colors: [
-                                  Colors.white,
-                                  Color(0xFFF1F8E9),
+          
+          // Dark Overlay for better text visibility
+          Container(
+            color: Colors.black.withOpacity(0.4),
+          ),
+          
+          // Content
+          SafeArea(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Spacer(flex: 2),
+                
+                // App Logo and Name
+                AnimatedBuilder(
+                  animation: _animationController,
+                  builder: (context, child) {
+                    return FadeTransition(
+                      opacity: _fadeAnimation,
+                      child: ScaleTransition(
+                        scale: _scaleAnimation,
+                        child: Column(
+                          children: [
+                            // App Name
+                            Text(
+                              AppConstants.appName,
+                              style: theme.textTheme.displayLarge?.copyWith(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: 2.0,
+                                shadows: [
+                                  Shadow(
+                                    color: Colors.black.withOpacity(0.5),
+                                    offset: const Offset(0, 2),
+                                    blurRadius: 4,
+                                  ),
                                 ],
                               ),
-                              borderRadius: BorderRadius.circular(70),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withAlpha(76),
-                                  blurRadius: 25,
-                                  offset: const Offset(0, 12),
-                                ),
-                                BoxShadow(
-                                  color: AppConstants.primaryColor.withAlpha(51),
-                                  blurRadius: 40,
-                                  offset: const Offset(0, 8),
-                                ),
-                              ],
                             ),
-                            child: Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                // Background trees
-                                Positioned(
-                                  top: 25,
-                                  left: 20,
-                                  child: Icon(
-                                    Icons.park,
-                                    size: 35,
-                                    color: AppConstants.mossGreen.withAlpha(128),
+                            
+                            const SizedBox(height: AppConstants.paddingMedium),
+                            
+                            // App Tagline
+                            Text(
+                              AppConstants.appTagline,
+                              textAlign: TextAlign.center,
+                              style: theme.textTheme.titleLarge?.copyWith(
+                                color: Colors.white,
+                                letterSpacing: 0.8,
+                                fontStyle: FontStyle.italic,
+                                shadows: [
+                                  Shadow(
+                                    color: Colors.black.withOpacity(0.5),
+                                    offset: const Offset(0, 2),
+                                    blurRadius: 4,
                                   ),
-                                ),
-                                Positioned(
-                                  top: 25,
-                                  right: 20,
-                                  child: Icon(
-                                    Icons.forest,
-                                    size: 30,
-                                    color: AppConstants.leafGreen.withAlpha(128),
-                                  ),
-                                ),
-                                // Main forest icon
-                                Icon(
-                                  Icons.nature_people,
-                                  size: 70,
-                                  color: AppConstants.primaryColor,
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                          
-                          const SizedBox(height: AppConstants.paddingLarge),
-                          
-                          // App Name
-                          Text(
-                            AppConstants.appName,
-                            style: theme.textTheme.displayMedium?.copyWith(
-                              color: theme.colorScheme.onPrimary,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 2.0,
-                            ),
-                          ),
-                          
-                          const SizedBox(height: AppConstants.paddingSmall),
-                          
-                          // App Tagline
-                          Text(
-                            AppConstants.appTagline,
-                            style: theme.textTheme.titleMedium?.copyWith(
-                              color: Colors.white.withAlpha(230),
-                              letterSpacing: 0.8,
-                              fontStyle: FontStyle.italic,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ),
-              
-              const Spacer(flex: 2),
-              
-              // Loading Indicator
-              AnimatedBuilder(
-                animation: _fadeAnimation,
-                builder: (context, child) {
-                  return Opacity(
-                    opacity: _fadeAnimation.value,
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          width: 40,
-                          height: 40,
-                          child: CircularProgressIndicator(
-                            strokeWidth: 3,
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              theme.colorScheme.onPrimary,
-                            ),
-                          ),
+                          ],
                         ),
-                        const SizedBox(height: AppConstants.paddingMedium),
-                        Text(
-                          'Loading...',
-                          style: theme.textTheme.bodyMedium?.copyWith(
-                            color: theme.colorScheme.onPrimary.withAlpha(178),
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-              
-              const SizedBox(height: AppConstants.paddingXLarge),
-              
-              // Version Info
-              AnimatedBuilder(
-                animation: _fadeAnimation,
-                builder: (context, child) {
-                  return Opacity(
-                    opacity: _fadeAnimation.value * 0.7,
-                    child: Text(
-                      'Version ${AppConstants.appVersion}',
-                      style: theme.textTheme.bodySmall?.copyWith(
-                        color: theme.colorScheme.onPrimary.withAlpha(153),
                       ),
-                    ),
-                  );
-                },
-              ),
-            ],
+                    );
+                  },
+                ),
+                
+                const Spacer(flex: 2),
+                
+                // Version Info
+                AnimatedBuilder(
+                  animation: _fadeAnimation,
+                  builder: (context, child) {
+                    return Opacity(
+                      opacity: _fadeAnimation.value * 0.7,
+                      child: Text(
+                        'Version ${AppConstants.appVersion}',
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: Colors.white.withOpacity(0.8),
+                          shadows: [
+                            Shadow(
+                              color: Colors.black.withOpacity(0.5),
+                              offset: const Offset(0, 1),
+                              blurRadius: 3,
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
